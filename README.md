@@ -17,28 +17,7 @@ Backend Service for the ManageBlue App.
 - token (String)*
 - date (Date)*
 
-**Project:**
-- title (String 64)*
-- description (String 1024)*
-- active (Bool)*
-- members ([User])*
-- auto: createdAt(Date)
-- auto: updatedAt(Date)
-
-**Task:**
-- title (String 64)*
-- note (String 1024)*
-- hours (Number)*
-- hourlyRate (Number)*
-- project (Project)*
-- date (Date)*
-- contributor (User)*
-- completed (Bool)*
-- paid (Bool)*
-- auto: createdAt(Date)
-- auto: updatedAt(Date)
-
-## API (`/api`)
+## API (`/api/version`)
 
 ### `/auth`
 - `/register` (POST) - Register new user
@@ -53,17 +32,4 @@ Backend Service for the ManageBlue App.
 - `/pass/:id` (PUT) - Update user password by ID
 - `/:id` (DELETE) - Delete user by ID
 
-### `/projects`
-- `/:id` (GET) - Return project by ID
-- `/` (GET) - Return all projects (matching query parameters)
-- `/` (POST) - Create new project
-- `/:id` (PUT) - Update project by ID
-- `/:id` (DELETE) - Delete project by ID
-
-### `/tasks`
-- `/:id` (GET) - Return task by ID
-- `/` (GET) - Return all tasks (matching query parameters)
-- `/` (POST) - Create new task
-- `/:id` (PUT) - Update task by ID
-- `/:id` (DELETE) - Delete task by ID
 
