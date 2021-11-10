@@ -1,5 +1,3 @@
 module.exports = {
-    secret: "It doesn't sound like that will ever be on my travel list."
+    secret: process.env.JWT_SECRET || "local development secret"
 };
-
-// TODO: move to .gitignore
