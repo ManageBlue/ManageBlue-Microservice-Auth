@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const passport = require('passport');
 const server = express();
-// TODO: env ali config
-const port = process.env.PORT || 5000;
-const url = process.env.URL || "http://localhost";
+const config = require('./config/config')
+
+const port = config.port
+const url = config.url
 //----------------------------------------------------------------------------------------------------------------------
 
 
@@ -25,11 +25,8 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 
 require("./models/db");
-require("./routes/authentication")(server);
 require("./routes/users")(server);
-require("./config/passport.js");
 
-server.use(passport.initialize());
 
 server.get("/", (req, res) => {
     res.json({ message: "Server is running!" });

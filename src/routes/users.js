@@ -1,7 +1,6 @@
 const router = require("express").Router();
-const authJWT = require("../middlewares/authJWT");
 const usersController = require("../controllers/users");
-
+const registerCheck = require("../middlewares/registerCheck")
 
 module.exports = usersRouter => {
 
@@ -15,22 +14,23 @@ module.exports = usersRouter => {
 
 
     // Return calling user data
-    router.get("/me", [authJWT.verifyTokenWhitelist], usersController.returnMe);
+    router.get("/me",  usersController.returnMe);
 
     // Return user by ID
-    router.get("/:id", [authJWT.verifyTokenWhitelist], usersController.returnByID);
+    router.get("/:id",  usersController.returnByID);
 
     // Return all users
-    router.get("/", [authJWT.verifyTokenWhitelist], usersController.returnAll);
+    router.get("/",  usersController.returnAll);
 
     // Update user by ID
-    router.put("/:id", [authJWT.verifyTokenWhitelist], usersController.update);
-
-    // Update user password by ID
-    router.put("/pass/:id", [authJWT.verifyTokenWhitelist], usersController.updateUserPass);
+    router.put("/:id",  usersController.update);
 
     // Delete user by ID
-    router.delete("/:id", [authJWT.verifyTokenWhitelist], usersController.delete);
+    router.delete("/:id",  usersController.delete);
 
-    usersRouter.use('/api/users', router);
+    // Register new user
+    router.post("/register", [registerCheck.checkUniqueUsernameEmail], usersController.register);
+
+
+    usersRouter.use('/api/v1/users', router);
 };

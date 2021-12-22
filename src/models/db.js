@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
+const config = require('../config/config')
 
-// TODO: env ali config?
-let dbURI = process.env.MONGODB_CLOUD_URI || 'mongodb://localhost/ManageBlue';
+let dbURI = config.dbURI
 
 // Connect to the database
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
-    // TODO: check
     // useCreateIndex: true,
     // useUnifiedTopology: true,
     // useFindAndModify: false,
@@ -54,13 +53,4 @@ process.on('SIGINT', () => {
 });
 
 
-// Exit application Heroku
-process.on('SIGTERM', () => {
-    safeExit('Exit application Heroku', () => {
-        process.exit(0);
-    });
-});
-
-
-require('./tokens');
 require('./users');
