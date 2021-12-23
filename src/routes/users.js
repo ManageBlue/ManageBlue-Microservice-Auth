@@ -32,5 +32,5 @@ module.exports = usersRouter => {
     router.post("/register", [registerCheck.checkUniqueUsernameEmail], usersController.register);
 
 
-    usersRouter.use('users/api/v1', router);
+    usersRouter.use('/users/api/v1', router);
 };
