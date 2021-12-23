@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manageblue-auth-microservice
+  labels:
+    app: manageblue-auth-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: manageblue-auth-microservice
+  template:
+    metadata:
+      labels:
+        app: manageblue-auth-microservice
+    spec:
+      containers:
+      - name: manageblue-auth-microservice
+        image: ghcr.io/manageblue/manageblue-microservice-auth:latest
+        env:
+          - name: MONGODB_CLOUD_URI
+            value: mongodb+srv://ManageBlueMongo:RSOmongo420@managebluemongo.wxj1o.mongodb.net/ManageBlueMongo
+        ports:
+        - containerPort: 5002
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: manageblue-auth-microservice-node-port
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 5002
+  selector:
+    app: manageblue-auth-microservice
